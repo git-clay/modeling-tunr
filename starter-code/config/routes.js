@@ -26,7 +26,7 @@ router.delete('/api/artists/:id', artistsController.destroy);
 router.get('/api/managers', managersController.index);
 
 //create
-router.post('/api/managers', managersController.create);
+router.post('/api/managers/', managersController.create);
 
 //show
 router.get('/api/managers/:id', managersController.show);

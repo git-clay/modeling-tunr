@@ -35,7 +35,7 @@ function ManagerShowController($http, $routeParams) {
 		console.log($routeParams.id);
 		$http.get('/api/managers/'+$routeParams.id)
 		.then(function(res){
-			console.log(res);
+			console.log(res.data);
 			vm.oneManager = res.data
 		});
 	}
@@ -47,14 +47,15 @@ function ManagerShowController($http, $routeParams) {
 ManagerNewController.$inject = ["$http", "$location"];
 function ManagerNewController($http, $location) {
     var vm = this;
-    vm.saveManger = saveManager;
-
+    vm.saveManager = saveManager;
+console.log('ManagerNewController')
     function saveManager() {
-        console.log(vm.newManager);
-        $http.post('/api/managers/', vm.newManager)
+        console.log(vm.saveManager);
+        $http.post('/api/managers/', vm.saveManager)
             .then(function(res) {
-                var manager = res.data;
+                var manager = res.body.data;
                 $location.path("/managers/" + manager.id);
+                res.json(manager);
             });        
     }
 }
@@ -71,14 +72,17 @@ function ManagerEditController($http, $routeParams, $location) {
             .then(function(res) {
                 console.log(res);
                 vm.updatedManager = res.data;
+
             });            
     }
-
+    console.log('manager.js', vm.updateManager)
     function updateManager() {
         $http.put('/api/managers/'+$routeParams.id, vm.updatedManager)
             .then(function(res) {
                 var manager = res.data;
                 $location.path("/managers/" + manager.id);
+                    console.log('manager.js -- in http.then', manager)
+
             });            
     }
 

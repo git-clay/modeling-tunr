@@ -62,6 +62,6 @@ angular.module("tunrApp", ['ngRoute'])
 
 			.when('/managers/:id/edit', {
 				templateUrl: '/templates/managers/edit.html',
-				controller: 'ManagersEditController as managersEditController'
+				controller: 'ManagerEditController as managersEditController'
 			})			
   });
